@@ -171,7 +171,8 @@ def eval_vqa_gen(task, generator, models, sample, **kwargs):
 
 
 def eval_refcoco(task, generator, models, sample, **kwargs):
-    def _calculate_ap_score(hyps, refs, thresh=0.5):
+    #threshold has been updated from 0.5 to .8
+    def _calculate_ap_score(hyps, refs, thresh=0.8):
         interacts = torch.cat(
             [torch.where(hyps[:, :2] < refs[:, :2], refs[:, :2], hyps[:, :2]),
              torch.where(hyps[:, 2:] < refs[:, 2:], hyps[:, 2:], refs[:, 2:])],
