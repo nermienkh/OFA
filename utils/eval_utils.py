@@ -184,7 +184,10 @@ def eval_refcoco(task, generator, models, sample, **kwargs):
         interacts_h = interacts[:, 3] - interacts[:, 1]
         area_interacts = interacts_w * interacts_h
         ious = area_interacts / (area_predictions + area_targets - area_interacts + 1e-6)
-        return ((ious >= thresh) & (interacts_w > 0) & (interacts_h > 0)).float()
+        flag=((ious >= thresh) & (interacts_w > 0) & (interacts_h > 0)).float()
+        print('{ious}{interacts_w}{interacts_h}'.format(ious,interacts_w,interacts_h))
+        print("flag={}".format(flag))
+        return  flag
 
     gen_out = task.inference_step(generator, models, sample)
     hyps = []
