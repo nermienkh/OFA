@@ -193,10 +193,10 @@ def eval_refcoco(task, generator, models, sample, **kwargs):
     hyps = []
     for i in range(len(gen_out)):
         hyps.append(gen_out[i][0]["tokens"][:-1] - len(task.src_dict) + task.cfg.num_bins)
-    hyps = torch.stack(hyps, dim=0)
-    hyps = hyps / (task.cfg.num_bins - 1) * task.cfg.max_image_size
-    hyps[:, ::2] /= sample['w_resize_ratios'].unsqueeze(1)
-    hyps[:, 1::2] /= sample['h_resize_ratios'].unsqueeze(1)
+        hyps = torch.stack(hyps, dim=0)
+        hyps = hyps / (task.cfg.num_bins - 1) * task.cfg.max_image_size
+        hyps[:, ::2] /= sample['w_resize_ratios'].unsqueeze(1)
+        hyps[:, 1::2] /= sample['h_resize_ratios'].unsqueeze(1)
 
     results = [
         {"uniq_id": sample_id,
