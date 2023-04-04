@@ -105,10 +105,11 @@ class RefcocoTask(OFATask):
         interacts_h = interacts[:, 3] - interacts[:, 1]
         area_interacts = interacts_w * interacts_h
         ious = area_interacts / (area_predictions + area_targets - area_interacts + 1e-6)
-        flag=((ious >= thresh) & (interacts_w > 0) & (interacts_h > 0)).float()
+        print ('refcoco.py')
+        return((ious >= thresh) & (interacts_w > 0) & (interacts_h > 0)).float()
 
-        print('{} {} {}'.format(ious,interacts_w,interacts_h))
-        print("flag={}".format(flag))
+        #print('{} {} {}'.format(ious,interacts_w,interacts_h))
+        ##print("flag={}".format(flag))
         return  flag
         #return ((ious >= thresh) & (interacts_w > 0) & (interacts_h > 0)).float()
 
