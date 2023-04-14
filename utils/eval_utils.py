@@ -200,7 +200,9 @@ def eval_refcoco(task, generator, models, sample, **kwargs):
 
     results = [
         {"uniq_id": sample_id,
-         "box": [hyps[i][0].item(), hyps[i][1].item(), hyps[i][2].item(), hyps[i][3].item()]}
+         "box": [hyps[i][0].item(), hyps[i][1].item(), hyps[i][2].item(), hyps[i][3].item()],
+         "hyps":hyps
+         }
         for i, sample_id in enumerate(sample["id"].tolist())
     ]
     scores = _calculate_ap_score(hyps, sample['region_coords'].float())
