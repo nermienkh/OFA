@@ -300,6 +300,7 @@ def eval_glue(task, generator, models, sample, **kwargs):
     predicts = logits.argmax(1).tolist()
     hyps = [task.bpe.decode(task.src_dict[predict]).strip() for predict in predicts]
     results = [{"hyp": hyp, "ref": ref_dict.keys()[0]} for hyp, ref_dict in zip(hyps, sample['ref_dict'])]
+    print("logits")
     return results, None
 
 
