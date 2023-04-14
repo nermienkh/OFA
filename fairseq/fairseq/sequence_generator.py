@@ -562,9 +562,6 @@ class SequenceGenerator(nn.Module):
         print(finalized[0][0]['positional_scores'][1])  
         print(finalized[0][0]['positional_scores'][2])  
         print(finalized[0][0]['positional_scores'][3]) 
-        
-
-
         return finalized
 
     def _prefix_tokens(
