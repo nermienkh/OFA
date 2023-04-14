@@ -184,8 +184,8 @@ def eval_refcoco(task, generator, models, sample, **kwargs):
         interacts_h = interacts[:, 3] - interacts[:, 1]
         area_interacts = interacts_w * interacts_h
         ious = area_interacts / (area_predictions + area_targets - area_interacts + 1e-6)
-        print ('eval_utils.py')
-        print(thresh)
+        #print ('eval_utils.py')
+        #print(thresh)
         return((ious >= thresh) & (interacts_w > 0) & (interacts_h > 0)).float()
        
 
