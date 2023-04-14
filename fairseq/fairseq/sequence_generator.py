@@ -558,7 +558,13 @@ class SequenceGenerator(nn.Module):
             finalized[sent] = torch.jit.annotate(
                 List[Dict[str, Tensor]], finalized[sent]
             )
-        print(finalized['score'])  
+        print(finalized[0][0]['positional_scores'][0])  
+        print(finalized[0][0]['positional_scores'][1])  
+        print(finalized[0][0]['positional_scores'][2])  
+        print(finalized[0][0]['positional_scores'][3]) 
+        
+
+
         return finalized
 
     def _prefix_tokens(
