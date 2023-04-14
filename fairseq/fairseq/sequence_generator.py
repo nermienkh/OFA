@@ -559,7 +559,6 @@ class SequenceGenerator(nn.Module):
                 List[Dict[str, Tensor]], finalized[sent]
             )
         print(finalized['score'])  
-        print(finalized[0][0]['score'])  
         return finalized
 
     def _prefix_tokens(
