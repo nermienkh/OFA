@@ -198,14 +198,18 @@ def eval_refcoco(task, generator, models, sample, **kwargs):
         hyps[:, ::2] /= sample['w_resize_ratios'].unsqueeze(1)
         hyps[:, 1::2] /= sample['h_resize_ratios'].unsqueeze(1)
 
-    results = [
+    results =  [
         {"uniq_id": sample_id,
+        
          "box": [hyps[i][0].item(), hyps[i][1].item(), hyps[i][2].item(), hyps[i][3].item()],
          "hyps":hyps,
-         "gen":gen_out
+         "score":gen_out[i][0]["score"].item()
          }
         for i, sample_id in enumerate(sample["id"].tolist())
     ]
+    #added to detect nothing reject the object 
+    if (math.exp(gen_out[i][0]["score"].item())<kwargs["rejection_threshold"]):
+        results["box"]=[0, 0, 0, 0]
     scores = _calculate_ap_score(hyps, sample['region_coords'].float())
     return results, scores
 
