@@ -206,7 +206,7 @@ def eval_refcoco(task, generator, models, sample, **kwargs):
          }
         for i, sample_id in enumerate(sample["id"].tolist())
     ]
-    print(kwargs["rejection_threshold"])
+    #print(kwargs["rejection_threshold"])
     #added to detect nothing reject the object 
     #if (math.exp(gen_out[0][0]["score"].item())<kwargs["rejection_threshold"]):
        #results["box"]=[0, 0, 0, 0]
