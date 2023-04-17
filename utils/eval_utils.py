@@ -203,7 +203,7 @@ def eval_refcoco(task, generator, models, sample, **kwargs):
         
          "box": [hyps[i][0].item(), hyps[i][1].item(), hyps[i][2].item(), hyps[i][3].item()],
          "hyps":hyps,
-         "score":gen_out[i][0]["score"].item()
+         "score":gen_out[0][0]["score"].item()
          }
         for i, sample_id in enumerate(sample["id"].tolist())
     ]
