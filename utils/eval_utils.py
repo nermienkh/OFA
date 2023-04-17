@@ -208,8 +208,8 @@ def eval_refcoco(task, generator, models, sample, **kwargs):
     ]
     print(kwargs["rejection_threshold"])
     #added to detect nothing reject the object 
-    #if (math.exp(gen_out[i][0]["score"].item())<kwargs["rejection_threshold"]):
-       # results["box"]=[0, 0, 0, 0]
+    if (math.exp(gen_out[0][0]["score"].item())<kwargs["rejection_threshold"]):
+       results["box"]=[0, 0, 0, 0]
     scores = _calculate_ap_score(hyps, sample['region_coords'].float())
     return results, scores
 
