@@ -172,6 +172,15 @@ def eval_vqa_gen(task, generator, models, sample, **kwargs):
 
 def eval_refcoco(task, generator, models, sample, **kwargs):
     #threshold has been updated from 0.5 to .8
+    #	task: The task object that defines the evaluation metrics.
+    #   generator: The generator model that is used to generate bounding boxes for the objects in the images.
+    #	models: The models that are used to extract features from the images and text descriptions.
+    #	sample: The sample that is being evaluated.
+    #	**kwargs: A dictionary of keyword arguments that can be used to modify the behavior of the function.
+
+
+
+
     def _calculate_ap_score(hyps, refs, thresh=0.8):
         interacts = torch.cat(
             [torch.where(hyps[:, :2] < refs[:, :2], refs[:, :2], hyps[:, :2]),
@@ -202,7 +211,8 @@ def eval_refcoco(task, generator, models, sample, **kwargs):
         {"uniq_id": sample_id,
          "box": [hyps[i][0].item(), hyps[i][1].item(), hyps[i][2].item(), hyps[i][3].item()],
          "hyps":hyps,
-         "score":gen_out[0][0]["score"].item()
+         "score":gen_out[0][0]["score"].item(),
+         "gen":gen_out
          }
         for i, sample_id in enumerate(sample["id"].tolist())
     ]
@@ -210,8 +220,8 @@ def eval_refcoco(task, generator, models, sample, **kwargs):
     #added to detect nothing reject the object 
     #if (math.exp(gen_out[0][0]["score"].item())<kwargs["rejection_threshold"]):
        #results["box"]=[0, 0, 0, 0]
-    scores = _calculate_ap_score(hyps, sample['region_coords'].float())
-    return results, scores
+    #scores = _calculate_ap_score(hyps, sample['region_coords'].float())
+    return results #, scores
 
 
 def eval_snli_ve(task, generator, models, sample, **kwargs):
